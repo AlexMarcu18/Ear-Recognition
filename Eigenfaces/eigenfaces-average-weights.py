@@ -105,8 +105,19 @@ substractMeanTrainingSet(dataMatrix, mean)
 
 # GET TRAINING SET WEIGHTS
 trainingSetWeights = getWeights(imagesDataMinusMean, eigenvectors, 1)
+averagePersonWeigths = []
 
-#CALCULATE ERRORS
+# CALCULATE AVERAGE WEIGHTS FOR EVERY HUMAN IN THE SET
+for i in range(0, 50):
+    shape = trainingSetWeights[i].shape
+    lowerBound = i * 6
+    upperBound = (i+1) * 6
+    vectorWeightSum = []
+    for j in range(lowerBound, upperBound):
+        vectorWeightSum.append(trainingSetWeights[j])
+    vectorWeightSum = np.asarray(vectorWeightSum, dtype=np.uint8)
+    averagePersonWeigths.append((vectorWeightSum[0:len(vectorWeightSum)].sum(0) // 6).astype(np.uint8))
+
 
 minEuclideanDist = []
 
@@ -132,8 +143,8 @@ for i in range(0, 50):
     testSetWeights = getWeights(testImageDataMinusMean, eigenvectors, 2)
 
     # CALCULATE EUCLIDEAN DISTANCES
-    for i in range(0, 300):
-        dist = cv2.norm(trainingSetWeights[i], testSetWeights)
+    for i in range(0, 50):
+        dist = cv2.norm(averagePersonWeigths[i], testSetWeights)
         euclideanDist.append((dist, i))
 
     # SAVE MIN DISTANCE
@@ -146,33 +157,34 @@ for i in range(0, 50):
             minDists.append(euclideanDist[i])
         minEuclideanDist.append(minDists)
 
-
+recognised = 0
 if NN == 1:
     for i in range(0, 50):
-        if minEuclideanDist[i][1] >= i * 6 and minEuclideanDist[i][1] < (i + 1) * 6:
+        if minEuclideanDist[i][1] == i:
+            print(i, minEuclideanDist[i][1], minEuclideanDist[i][0])
+            recognised += 1
             print('No.%s Recognised'%i)
         else: 
-            print(i, minEuclideanDist[i][1],  i*6, (i+1)*6, minEuclideanDist[i][0])
+            print('Who are you no %s'%i)
+            print(i, minEuclideanDist[i][1], minEuclideanDist[i][0])
+        print('Next person \n')
 elif NN > 1:
     for i in range(0, 50):
         for j in range(0, NN):
-            if minEuclideanDist[i][j][1] >= i * 6 and minEuclideanDist[i][j][1] < (i + 1) * 6:
+            if minEuclideanDist[i][j][1] == i:
                 print('No.%s Recognised'%i)
+                recognised += 1
+                print(i, minEuclideanDist[i][j][1], minEuclideanDist[i][j][0])
             else: 
                 print('Who are you no %s'%i)
-                print(i, minEuclideanDist[i][j][1],  i*6, (i+1)*6, minEuclideanDist[i][j][0])
-        print('Next Person')
-
-# for i in range(0, 300):
-#     print("Error no. %s \n"%int(i), errors[i])
-
-# print("Min error:", min(errors))
-# print("Max error:", max(errors))
+                print(i, minEuclideanDist[i][j][1], minEuclideanDist[i][j][0])
+        print('Next Person \n')
 
 
 # testImage = cv2.resize(cv2.imread(testImagePath), (100, 100))
 # cv2.imshow('Test', testImage)
-
+percentage = recognised/50 * 100
+print(f'The percentage of recognition is: {percentage}%')
 
 # firstImage = dataMatrix[min(errors)[1]].astype('uint8').reshape(size)
 # cv2.imshow('Recognized', firstImage)
