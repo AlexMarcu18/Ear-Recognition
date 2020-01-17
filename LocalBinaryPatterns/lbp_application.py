@@ -25,7 +25,7 @@ data = []
 labels = []
 
 
-dirName = '../CroppedTrainingDataSet1'
+dirName = '../CroppedTrainingDataSet2'
 imagesPaths = os.listdir(dirName)
 imagesPaths.sort()
 personIndex = 0
@@ -34,11 +34,11 @@ print('Calculating Local Binary Pattern Algorithm using training data')
 for path in imagesPaths:
     calculateHist(os.path.join(dirName, path))
 
-print('Training our algorithm based on our histograms')
+print('Training the algorithm based on our histograms')
 model = LinearSVC(C=100, max_iter=100000)
 model.fit(data, labels)
 
-dirName = "../TestDataSet1"
+dirName = "../TestDataSet2"
 imagesPaths = os.listdir(dirName)
 imagesPaths.sort()
 
