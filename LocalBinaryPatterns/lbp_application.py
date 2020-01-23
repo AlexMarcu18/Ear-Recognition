@@ -1,5 +1,6 @@
 from lbp_algorithm import LocalBinaryPatterns
 from sklearn.svm import LinearSVC
+from sklearn.metrics.pairwise import cosine_similarity
 import argparse
 import cv2
 import os
@@ -50,18 +51,18 @@ for imagePath in imagesPaths:
     image = cv2.imread(path)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     hist = lbp.describe(gray)
+    # res = cosine_similarity(hist.reshape(1,-1), data[20].reshape(1,-1))
+    # print(res)
+    # exit()
     prediction = model.predict(hist.reshape(1, -1))
 
     # save the prediction for each image
     predictions.append((imagePath, prediction[0]))
-    # cv2.putText(image, prediction[0], (10, 30), cv2.FONT_HERSHEY_SIMPLEX,1.0, (0, 0, 255), 3)
-    # cv2.imshow("Image", image)
     cv2.waitKey(0)
 
 recognised = 0
 # see results
 for predict in predictions:
-    print(predict)
     if predict[0].split('_')[0] == predict[1].split('_')[0]:
         recognised += 1
     print(f"I classifed {predict[0]} as {predict[1]}")

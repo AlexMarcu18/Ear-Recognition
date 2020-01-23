@@ -1,0 +1,16 @@
+CroppedDataSet1
+- 28% fara threshold
+- 18% cu treshold: 127 - scaderea sau cresterea valorii poate varia rata de recunoastere intre 10% si 25%
+
+Observatie generala: cele mai bune procentaje de recunoastere se regasesc atunci cand valoarea threshold se ia 100;
+Formele unice ale urechii ies cel mai bine cand este aplicat acest threshold
+
+CroppedDataSet2
+- 10% cu threshold: 127; 26% cu threshold 100
+- 28% fara threshold
+
+TrainingDataSet 1 si 2 - scad procentajele daca nu sunt cropped sub 20%, indiferent de aplicarea thresholdului sau nu
+
+ResizedDataSet - rezultate slabe sub 20% 
+- threshold imbunatateste rata de recunoastere cu 5%-10%
+- trebuie ales prin incercari
