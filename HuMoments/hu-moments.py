@@ -15,7 +15,7 @@ def logNormalize(moment):
     return 0
 
 huMomentsMatrix = []
-dirName = '../CroppedTrainingDataSet1'
+dirName = '../TrainingData-CVLOO'
 imagesPaths = os.listdir(dirName)
 imagesPaths.sort()
 print('Calculating Hu Moments for our dataset..')
@@ -30,7 +30,7 @@ for path in imagesPaths:
     result = map(logNormalize, huMoments)
     huMomentsMatrix.append((list(result), path.split('_')[0]))
 
-dirName = '../TestDataSet1'
+dirName = '../TestData-CVLOO'
 imagesPaths = os.listdir(dirName)
 imagesPaths.sort()
 

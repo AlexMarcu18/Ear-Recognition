@@ -8,7 +8,7 @@ import sys
 NUM_EIGEN_FACES = 10
 # Maximum weight
 MAX_SLIDER_VALUE = 255
-dirName = '../ResizedTrainingData'
+dirName = '../TrainingData-CVLOO'
 
 def readImages(imagePath):
     image = cv2.imread(imagePath, cv2.IMREAD_COLOR)
@@ -109,7 +109,7 @@ trainingSetWeights = getWeights(imagesDataMinusMean, eigenvectors, 1)
 
 minEuclideanDist = []
 
-testDirName = '../TestDataSet1'
+testDirName = '../TestData-CVLOO'
 imagesNames = os.listdir(testDirName)
 imagesNames.sort()
 
@@ -119,7 +119,7 @@ for i in range(0, 50):
     euclideanDist = []
     # LOAD TEST IMAGE
     testImagePath = os.path.join(testDirName, imagesNames[i])
-    testImage = cv2.resize(cv2.imread(testImagePath), (size[0], size[1]))
+    testImage = cv2.imread(testImagePath)
     testData = np.zeros(size[0] * size[1] * size[2])
     testImage = testImage.flatten()
 

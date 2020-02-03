@@ -8,7 +8,7 @@ import sys
 NUM_EIGEN_FACES = 10
 # Maximum weight
 MAX_SLIDER_VALUE = 255
-dirName = '../ResizedTrainingData'
+dirName = '../TrainingData-CVLOO'
 
 def readImages(imagePath):
     image = cv2.imread(imagePath, cv2.IMREAD_COLOR)
@@ -121,7 +121,7 @@ for i in range(0, 50):
 
 minEuclideanDist = []
 
-testDirName = '../TestData'
+testDirName = '../TestData-CVLOO'
 imagesNames = os.listdir(testDirName)
 imagesNames.sort()
 
