@@ -8,7 +8,7 @@ class LocalBinaryPatterns:
         self.numPoints = numPoints
         self.radius = radius
 
-    def describe(self, image, eps=1e-7):
+    def describe(self, image):
         lbp = feature.local_binary_pattern(image, self.numPoints,
             self.radius)
 

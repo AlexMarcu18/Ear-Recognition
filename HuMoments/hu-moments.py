@@ -48,9 +48,9 @@ for path in imagesPaths:
     for i in huMomentsMatrix:
         dist = euclideanDistance(testIm[0], i[0])
         distMatrix.append((dist, i[1]))
-    
+
     distMatrix.sort()
-    if distMatrix[0][1] == testIm[1]: 
+    if distMatrix[0][1] == testIm[1]:
         # print(distMatrix[0][1], testIm[1])
         recognised += 1
 

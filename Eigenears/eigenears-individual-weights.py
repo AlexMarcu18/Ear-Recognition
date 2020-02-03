@@ -35,7 +35,7 @@ def getWeights(substractedImageData, eigenvectors, flag):
     # NORMALIZE EIGENVECTORS
     for i in range(0, NUM_EIGEN_FACES):
         normalizedEigenvectors.append(cv2.normalize(eigenvectors[i], None, alpha = 0, beta = 255, norm_type = cv2.NORM_MINMAX, dtype = cv2.CV_32F).astype(np.uint8).reshape(size[0] * size[1] * size[2]))
-    
+
     # CALCULATE WEIGHTS
     if flag == 1:
         trainingSetWeightsVector = []
@@ -50,9 +50,8 @@ def getWeights(substractedImageData, eigenvectors, flag):
         for i in range(0, NUM_EIGEN_FACES):
             testSetWeightsVector.append(normalizedEigenvectors[i] @ substractedImageData[0])
         return np.asarray(testSetWeightsVector)
-    else: 
+    else:
         return
-    
 
 def substractMeanTrainingSet(dataMatrix, mean):
     for i in range(0, 300):
@@ -65,7 +64,7 @@ def substractMeanTestSet(dataImage, mean):
 def showEigenFaces(eigenfaces):
     for i in range(0, NUM_EIGEN_FACES):
         normalizedFace = cv2.normalize(eigenfaces[i], None, alpha = 0, beta = 255, norm_type = cv2.NORM_MINMAX, dtype = cv2.CV_32F).astype(np.uint8)
-        cv2.imshow('Eigenface no. %s'%(i+1), cv2.resize(normalizedFace, (0,0), fx=2, fy=2))
+        cv2.imshow('Eigenear no. %s'%(i+1), cv2.resize(normalizedFace, (0,0), fx=2, fy=2))
 
 def showAverageFace(averageface):
     convertedAverageFace = averageFace.astype(np.uint8)
@@ -110,7 +109,7 @@ trainingSetWeights = getWeights(imagesDataMinusMean, eigenvectors, 1)
 
 minEuclideanDist = []
 
-testDirName = '../TestData'
+testDirName = '../TestDataSet1'
 imagesNames = os.listdir(testDirName)
 imagesNames.sort()
 

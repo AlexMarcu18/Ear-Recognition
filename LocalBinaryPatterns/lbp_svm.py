@@ -26,9 +26,10 @@ data = []
 labels = []
 
 
-dirName = '../CroppedTrainingDataSet2'
+dirName = '../TrainingDataSet2'
 imagesPaths = os.listdir(dirName)
 imagesPaths.sort()
+
 personIndex = 0
 index = 0
 print('Calculating Local Binary Pattern Algorithm using training data')
@@ -68,5 +69,5 @@ for predict in predictions:
     print(f"I classifed {predict[0]} as {predict[1]}")
 
 
-percentage = recognised/50 * 100
+percentage = recognised/100 * 100
 print(percentage)
