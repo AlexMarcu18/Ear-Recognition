@@ -18,6 +18,7 @@ def calculateHist(imagePath):
     image = cv2.imread(imagePath)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     hist = lbp.describe(gray)
+    # use 3rd string in CVLOO and 2 in 2-FOLD
     labels.append(imagePath.split(os.path.sep)[2])
     data.append(hist)
 
@@ -26,7 +27,7 @@ data = []
 labels = []
 
 
-dirName = '../TrainingData-CVLOO'
+dirName = '../TrainingDataSet1'
 imagesPaths = os.listdir(dirName)
 imagesPaths.sort()
 
@@ -40,7 +41,7 @@ print('Training the algorithm based on our histograms')
 model = LinearSVC(C=100, max_iter=100000)
 model.fit(data, labels)
 
-dirName = "../TestData-CVLOO"
+dirName = "../TestDataSet1"
 imagesPaths = os.listdir(dirName)
 imagesPaths.sort()
 
@@ -62,6 +63,6 @@ for predict in predictions:
         recognised += 1
     print(f"I classifed {predict[0]} as {predict[1]}")
 
-
+# divide by 100 on 2-fold and by 50 on LOO
 percentage = recognised/100 * 100
 print(percentage)

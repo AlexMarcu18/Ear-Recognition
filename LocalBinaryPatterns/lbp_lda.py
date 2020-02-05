@@ -9,16 +9,16 @@ def calculateHist(imagePath):
     image = cv2.imread(imagePath)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     hist = lbp.describe(gray)
-    namePath = imagePath.split(os.path.sep)[2]
+    namePath = imagePath.split(os.path.sep)[3]
     label = namePath.split('_')[0]
     labels.append(label)
     data.append(hist)
 
-lbp = LocalBinaryPatterns(16, 2)
+lbp = LocalBinaryPatterns(10, 10)
 data = []
 labels = []
 
-dirName = '../TrainingDataSet1'
+dirName = '../Dataset-CVLOO/CroppedTrainingDataSet1'
 imagesPaths = os.listdir(dirName)
 imagesPaths.sort()
 
@@ -29,7 +29,7 @@ for path in imagesPaths:
 lda = LinearDiscriminantAnalysis()
 lda.fit(data, labels)
 
-dirName = "../TestDataSet1"
+dirName = "../Dataset-CVLOO/TestDataSet1"
 imagesPaths = os.listdir(dirName)
 imagesPaths.sort()
 
@@ -56,5 +56,5 @@ for predict in predictions:
         recognised += 1
     print(f"I classifed {predict[0]} as {predict[1]}")
 
-percentage = recognised/100 * 100
+percentage = recognised/50 * 100
 print(percentage)
