@@ -1,0 +1,29 @@
+- LBP recunoste mult mai bine daca fotografiile contin mult mai multi pixel, practic, mai multi pixeli = mai multa informatie
+( improve + 50%)
+- crop ul fotografiilor de asemenea a facut ca procentul de recunoastere sa fie imbunatatit cu cel putin 10%, ajungand chiar si pana la 100%
+pe al doilea set de data
+
+
+LBP cross-validation leave 1 out
+- SVM - 10, 18 lbp parameters
+    - Normal Datasets
+        - 80 - 90%
+    - Cropped Datasets
+        - 95 - 100%
+- LDA - 10,10 lbp parameters
+    - Normal Datasets
+        20 30%
+    -Cropped Datasets
+        20 30%
+
+LBP cross-validation leave 2 out
+- SVM - 10, 18 param lbp
+    - Nomal Datasets
+    - Cropped Datasets
+        60 - 70%
+- LDA - 10, 10 param lbp
+    - Normal Datasets
+        25 - 45%
+    - Cropped Datasets
+        10 - 15 %
+
